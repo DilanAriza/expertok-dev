@@ -1,0 +1,16 @@
+.card-fundadores {
+  width: 18rem;
+}
+
+@media only screen and (min-width: 425px) {
+  .card-fundadores {
+    width: 100%;
+  }
+}
+
+@media only screen and (min-width: 768px) {
+  .card-fundadores {
+    width: 18rem;
+  }
+}
+/*# sourceMappingURL=home.css.map */
