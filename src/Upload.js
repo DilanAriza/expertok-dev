@@ -40,9 +40,6 @@ class Upload extends Component {
 
         task.on('state_changed', (snapshot)=>{
             let percentage = (snapshot.bytesTransferred / snapshot.totalBytes) * 100
-            this.setState({
-                porcentaje: percentage
-            })
             console.log(percentage + "%");
         }, (error)=>{
             console.log(error.message);
@@ -64,8 +61,8 @@ class Upload extends Component {
 
     render() {
         return (
-            <div>
-                <form onSubmit={this.handleSubmit}>
+            <div className="pt-5">
+                <form className="pt-5" onSubmit={this.handleSubmit}>
                 <input 
                 name="image" 
                 type="file"

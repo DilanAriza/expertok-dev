@@ -11,8 +11,10 @@ export default class Home extends Component {
                     <div className="container">
                         <div className="row">
                             <div className="col-12 col-sm-6 banner-text">
-                                <h2>Tutores certificados a tu alcance</h2>
-                                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Consequatur rerum, ea fuga veniam blanditiis quo.</p>
+                                <h2>TUTORES DE ALTA CALIDAD</h2>
+                                <p>
+                                    Aprende facil y son complicaciones, con los mejores profesores a tu alcance
+                                </p>
                                 <Link className="link" to="/acerca-de">Acerca de</Link>
                             </div>
                         </div>
