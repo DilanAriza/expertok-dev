@@ -30,7 +30,7 @@ export default class Home extends Component {
                                 <h1 className="w-100 col-12 m-0 p-0 text-center mb-4 text-primary">
                                     ¿Qué es Expertok?
                                 </h1>        
-                                <p className="w-100 col-12 m-0 p-0 mt-5">
+                                <p className="w-100 col-12 m-0 p-0 mt-5 text-justify">
                                     Lorem ipsum dolor sit amet consectetur adipisicing elit. Sequi reiciendis aliquid corporis rem sed eaque veniam culpa molestiae accusamus totam quos eligendi placeat maiores, est minima iste dignissimos earum natus deserunt inventore! Id obcaecati ab quia nihil consequuntur, deserunt, qui aliquid corrupti voluptates incidunt dolore esse nam. Temporibus delectus nesciunt inventore excepturi voluptatibus, assumenda eos, reiciendis repellat quasi hic consequuntur voluptas non eaque laudantium consequatur dolorum facilis modi illo sequi. Doloribus delectus itaque repellendus obcaecati aspernatur voluptates ab beatae adipisci mollitia in dolorem neque doloremque perferendis nisi impedit corporis amet nemo fugit voluptatibus deserunt, temporibus nulla expedita similique. Eaque, minus.
                                 </p>
                             </div>
