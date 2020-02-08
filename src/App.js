@@ -1,10 +1,12 @@
-import React from 'react';
+import React, {Component} from 'react';
+//------------- Styles and js --------------------------------------------
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap/dist/js/bootstrap.min.js';
 import $ from 'jquery';
-
 import './css/index.css';
 
+
+//------------- React Router ---------------------------------------------
 import {
     BrowserRouter as Router,
     Switch,
@@ -12,18 +14,44 @@ import {
     Link
 } from "react-router-dom";
 
-import Upload from './Upload';
+//------------- Componentes ----------------------------------------------
+import Upload from './components/Upload';
+import Entrar from './components/Entrar';
 import Home from './Home';
+import Registrarme from './components/Registrarme';
 
-function App() {
-    return (
-        <Router>
+
+//------------- IMGs ------------------------------------------------------
+import Icon from './img/icon-navbar.png'
+
+export default class App extends Component {
+    
+    constructor(props){
+        super(props);
+        this.state={
+            url_backend:'http://localhost/dilan/expertok-backend/?server=expertok&apiKey=dilanariza&'
+        }
+    }
+
+    render() {
+        return (
+            <Router>
             <header>
                 <nav className="navbar navbar-expand-lg navbar-light bg-white">
-                    <Link to="/">
-                        <img src="https://via.placeholder.com/270x60?text=Logo+Expertok" className="navbar-brand" alt="Logo navbar"/>
+                    <Link to="/" className="my-2 mt-3 ml-3 mb-0">
+                        <img src={Icon} className="navbar-brand" alt="Logo navbar"/>
                     </Link>
-                    <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent1" aria-controls="navbarSupportedContent1" aria-expanded="false" aria-label="Toggle navigation"> <span className="navbar-toggler-icon"></span> </button>
+                    <button 
+                        className="navbar-toggler mr-2 color-primary" 
+                        type="button"
+                        data-toggle="collapse" 
+                        data-target="#navbarSupportedContent1" 
+                        aria-controls="navbarSupportedContent1" 
+                        aria-expanded="false" 
+                        aria-label="Toggle navigation"
+                    > 
+                        <span className="navbar-toggler-icon"></span> 
+                    </button>
                     <div className="collapse navbar-collapse" id="navbarSupportedContent1">
                         <ul className="navbar-nav ml-auto mr-2">
                             <li className="nav-item active"> 
@@ -44,42 +72,71 @@ function App() {
                                     Cursos 
                                 </Link>
                                 <div className="dropdown-menu" aria-labelledby="navbarDropdown1"> 
-                                    <Link className="dropdown-item" to="/ciencias">Ciencias</Link> 
+                                    <Link className="dropdown-item" to="/mecatronica">Mecatronica</Link> 
                                     <Link className="dropdown-item" to="/diseño">Diseño</Link>
                                     <div className="dropdown-divider"></div>
-                                    <Link className="dropdown-item" to="/mecatronica">Mecatronica</Link> 
+                                    <Link className="dropdown-item" to="/matematicas">matematicas</Link>
+                                    <Link className="dropdown-item" to="/fisica">fisica</Link>
                                 </div>
                             </li>
                             <li className="nav-item mr-5"> 
-                                <Link className="nav-link" to="/acerca-de">Información</Link> 
+                                <Link className="nav-link" to="/entrar">Entrar</Link> 
                             </li>
                         </ul>
                     </div>
                 </nav>
             </header>
             <Switch>
-                <Route path="/" exact>
-                    <Home />
+                <Route 
+                    exact
+                    path="/" 
+                    component={
+                        (props)=>
+                        <Home 
+                            {...props} 
+                            url_backend={this.state.url_backend}
+                        />
+                    } >
                 </Route>
-                <Route path="/upload">
-                    <Upload />
+                <Route 
+                    exact
+                    path="/registrarme" 
+                    component={
+                        (props)=>
+                        <Registrarme 
+                            {...props} 
+                            url_backend={this.state.url_backend}
+                        />
+                    } >
                 </Route>
-                <Route path="/fundadores">
-                    <Home />
+                <Route 
+                    path="/entrar/:register" 
+                    component={
+                        (props)=>
+                        <Entrar 
+                            {...props} 
+                            url_backend={this.state.url_backend}
+                        />
+                    }
+                ></Route>
+                <Route 
+                    path="/entrar" 
+                    component={
+                        (props)=>
+                        <Entrar 
+                            {...props} 
+                            url_backend={this.state.url_backend}
+                        />
+                    }
+                >
                 </Route>
-                <Route path="/cursos">
-                    <Home />
-                </Route>
-                <Route path="/tutorias">
-                    <Home />
-                </Route>
-                <Route path="/acerca-de">
-                    <Upload />
+                <Route exact path="/registrarme">
+                    <Registrarme {...this.props} url_backend={this.state.url_backend}/>
                 </Route>
             </Switch>
             
         </Router>
-    );
+        )
+    }
 }
 
-export default App;

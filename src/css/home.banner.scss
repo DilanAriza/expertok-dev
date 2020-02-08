@@ -3,7 +3,8 @@
     background: url(../img/banner.jpg);
     min-height: 100vh;
     background-size: cover;
-    background-position: center;
+    background-position: cover;
+    background-attachment: fixed;
     padding: 250px 0 200px;
     color: white;
     .banner-text {
@@ -36,5 +37,12 @@
                 transform: translateY(-4px);
             }
         }
+    }
+}
+
+@media only screen and (min-width: 320px) {
+    .banner-text {
+        margin: 20px 0;
+        border-radius: 0;
     }
 }
