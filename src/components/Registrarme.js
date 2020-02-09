@@ -10,7 +10,7 @@ export default class Registrarme extends Component {
     constructor(props){
         super(props);
         this.state = {
-            url_backend: this.props.url_backend + 'url_api=register',
+            url_backend: this.props.url_backend + 'login/register',
             name:'',
             email:'',
             password:'',
@@ -54,7 +54,7 @@ export default class Registrarme extends Component {
         });
     }
 
-    saveData = async()=>{
+    register = async()=>{
         const name = this.state.name;
         const email = this.state.email;
         const password = this.state.password;
@@ -63,18 +63,17 @@ export default class Registrarme extends Component {
 
         if(name !== "" && email !== "" && password !== "" && confirmPassword !== ""){
             if(password === confirmPassword){
-                var datos = new FormData();
-                datos.append('username', this.state.name);
-                datos.append('email', this.state.email);
-                datos.append('password', this.state.password); 
-                datos.append('register', register);
 
                 const datas = await axios({
                         method: 'POST',
                         url: this.state.url_backend,
-                        data: datos
+                        data: {
+                            username: this.state.name,
+                            email: this.state.email,
+                            password: this.state.password,
+                            register: register
+                        }
                     });
-                console.log(datas.data);
                 if(datas.data['status'] === "200"){
                     this.setState({
                         alert_open: true,
@@ -120,9 +119,9 @@ export default class Registrarme extends Component {
     }
 
     redirectApp = ()=>{
-        setInterval(()=>{
+        // setInterval(()=>{
 
-        }, 1000);
+        // }, 1000);
     }
 
     toggleAlert = ()=>{
@@ -131,7 +130,7 @@ export default class Registrarme extends Component {
         });
     }
 
-    render() {
+    render(props) {
         return (
             <div>
                 <div className="container-fluid entrar-banner d-flex justify-content-center align-items-center">
@@ -146,7 +145,7 @@ export default class Registrarme extends Component {
                             </Alert>
                         <div className="card card-entrar">
                             <div className="card-header">
-                                <h1 className="w-100 text-center" onLoadStart={this.verifyUsers}>Registrate</h1>
+                                <h1 className="w-100 text-center">Registrate</h1>
                             </div>
                             <div className="card-body">
                                 <div className="form p-3">
@@ -193,7 +192,7 @@ export default class Registrarme extends Component {
                                     <button 
                                         type="submit" 
                                         className="btn btn-secondary"
-                                        onClickCapture={this.saveData}>
+                                        onClickCapture={this.register}>
                                         Crear cuenta
                                     </button>
                                 </div>

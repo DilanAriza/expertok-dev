@@ -15,7 +15,7 @@ import {
 } from "react-router-dom";
 
 //------------- Componentes ----------------------------------------------
-import Upload from './components/Upload';
+// import Upload from './components/Upload';
 import Entrar from './components/Entrar';
 import Home from './Home';
 import Registrarme from './components/Registrarme';
@@ -23,13 +23,14 @@ import Registrarme from './components/Registrarme';
 
 //------------- IMGs ------------------------------------------------------
 import Icon from './img/icon-navbar.png'
+import GetCookieAll from './components/production/GetCookieAll';
 
 export default class App extends Component {
     
     constructor(props){
         super(props);
         this.state={
-            url_backend:'http://localhost/dilan/expertok-backend/?server=expertok&apiKey=dilanariza&'
+            url_backend:'https://expertok-backend.herokuapp.com/'
         }
     }
 
@@ -38,8 +39,8 @@ export default class App extends Component {
             <Router>
             <header>
                 <nav className="navbar navbar-expand-lg navbar-light bg-white">
-                    <Link to="/" className="my-2 mt-3 ml-3 mb-0">
-                        <img src={Icon} className="navbar-brand" alt="Logo navbar"/>
+                    <Link to="/" className="m-2 ml-3 my-3">
+                        <img src={Icon} className="img" alt="Logo navbar"/>
                     </Link>
                     <button 
                         className="navbar-toggler mr-2 color-primary" 
@@ -130,8 +131,16 @@ export default class App extends Component {
                     }
                 >
                 </Route>
-                <Route exact path="/registrarme">
-                    <Registrarme {...this.props} url_backend={this.state.url_backend}/>
+                <Route 
+                    path="/cookie" 
+                    component={
+                        (props)=>
+                        <GetCookieAll 
+                            {...props} 
+                            url_backend={this.state.url_backend}
+                        />
+                    }
+                >
                 </Route>
             </Switch>
             

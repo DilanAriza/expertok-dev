@@ -1,36 +1,44 @@
 import React, { Component } from 'react'
 
 import './../css/components/entrar.css';
-import { Link, matchPath } from 'react-router-dom';
+
+//React router ----------------------------------------------------
+import { Link } from 'react-router-dom';
+
+//React Strap  ----------------------------------------------------
 import { Alert } from 'reactstrap'
+//Axios -----------------------------------------------------------
+import axios from 'axios';
+//Cookies ---------------------------------------------------------
+import Cookies from 'universal-cookie';
+const cookies = new Cookies();
 
 export default class Entrar extends Component {
     
     constructor(props){
         super(props);
         this.state={
-            backend_url: this.props.backend_url,
+            backend_url: this.props.url_backend + 'login/login',
+            email:'',
+            password:'',
             alert_open: false,
             alert_color: '',
-            alert_content:''
+            alert_message:''
         }
+        this.handleEmail = this.handleEmail.bind(this);
+        this.handlePassword = this.handlePassword.bind(this);
     }
 
-    // state={
-    // }
-
     componentWillMount = ()=>{
-        // console.log(this.props.match.params);
         if(this.props.match.params.register){
             const paramRegister = this.props.match.params.register;
-            if(paramRegister == "success"){
+            if(paramRegister === "success"){
                 this.setState({
                     alert_color: 'success',
-                    alert_content: 'Te registraste correctamente',
+                    alert_message: 'Te registraste correctamente',
                     alert_open: true
                 });
             }
-            console.log(this.props.match.params.register);
         }
     }
 
@@ -38,6 +46,84 @@ export default class Entrar extends Component {
         this.setState({
             alert_open: !this.state.alert_open
         });
+    }
+
+    handleEmail = (e)=>{
+        if(e.target.value !== ''){
+            const email = e.target.value;
+            this.setState({
+                email
+            });   
+        }
+
+        if(e.target.select !== ''){
+            const email = e.target.value;
+            this.setState({
+                email
+            });
+        }
+    }
+
+    handlePassword = (e)=>{
+        const password = e.target.value;
+        this.setState({
+            password: password
+        });
+    }
+    
+    cookieGenerate = (idCok, valueCok)=>{
+        let timeCookie = new Date();
+        timeCookie.setTime(timeCookie.getTime() + (timeCookie*60*1000));
+        cookies.set(idCok, valueCok,{ path: '/',expires: timeCookie });
+    }
+
+    login = async()=>{
+        const email = this.state.email;
+        const password = this.state.password;
+
+        if(email !== '' && password !== ''){
+            const responseServer = await axios({
+                method: 'POST',
+                url: this.state.backend_url,
+                data: {
+                    email,
+                    password
+                }
+            });
+            if(responseServer.data['status'] === "200"){
+                this.setState({
+                    alert_open: true,
+                    alert_color: 'primary',
+                    alert_message: responseServer.data['message']
+                });
+                const tokenUser = responseServer.token;
+                this.cookieGenerate('tokenUser', tokenUser);
+                this.cookieGenerate('Auth', true);
+                this.cookieGenerate('userData', responseServer.data);
+            }
+            
+            if(responseServer.data['status'] === '300'){
+                this.setState({
+                    alert_open: true,
+                    alert_color: 'warning',
+                    alert_message: responseServer.data['message']
+                });    
+            }
+
+            if(responseServer.data['status'] === '400'){
+                this.setState({
+                    alert_open: true,
+                    alert_color: 'danger',
+                    alert_message: responseServer.data['message']
+                });
+            }
+        }else{
+            this.setState({
+                alert_open: true,
+                alert_color: "warning",
+                alert_message : "Por favor llena todos los espacios"
+            })    
+        }
     }
 
     render(props) {
@@ -50,7 +136,7 @@ export default class Entrar extends Component {
                             isOpen={this.state.alert_open} 
                             toggle={this.toggleAlert.bind(this)}
                         >
-                            {this.state.alert_content}
+                            {this.state.alert_message}
                         </Alert>
                         <div className="card card-entrar">
                             <div className="card-header">
@@ -65,6 +151,7 @@ export default class Entrar extends Component {
                                             id="email" 
                                             className="form-control" 
                                             placeholder="E-mail"
+                                            onChange={this.handleEmail}
                                         />
                                     </div>
                                     <div className="form-group mt-4">    
@@ -74,9 +161,10 @@ export default class Entrar extends Component {
                                             id="password" 
                                             className="form-control" 
                                             placeholder="Contraseña"
+                                            onChange={this.handlePassword}
                                         />
                                     </div>
-                                    <button type="submit" className="btn btn-secondary">Entrar</button>
+                                    <button onClick={this.login} type="submit" className="btn btn-secondary">Entrar</button>
                                 </div>
                                 <p className="w-100 text-center">No posees una cuenta? <Link to="/registrarme" className="btn btn-primary m-0">Registrate</Link></p>
                             </div>

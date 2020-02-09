@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import './css/home.index.css';
 import './css/home.banner.css' ;
 import { Link } from 'react-router-dom';
-import { Alert } from 'reactstrap';
+// import { Alert } from 'reactstrap';
 
 export default class Home extends Component {
     render() {
