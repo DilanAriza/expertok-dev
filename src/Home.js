@@ -1,12 +1,20 @@
-import React, { Component } from 'react'
+import React, { Component, Suspense } from 'react'
 import './css/home.index.css';
 import './css/home.banner.css' ;
 import { Link } from 'react-router-dom';
-// import { Alert } from 'reactstrap';
+import Spinner from './assets/Spinner';
 
 export default class Home extends Component {
+    
+    getSpinner = ()=>{
+        return(
+            <Spinner />
+        )
+    }
+
     render() {
         return (
+            <Suspense fallback={this.getSpinner}>
             <div className="div">
                 <div className="container-fluid m-0 p-0">
                     <div className="banner">
@@ -127,6 +135,7 @@ export default class Home extends Component {
                 </div>
             </div>
         </div>
+        </Suspense>
         )
     }
 }
