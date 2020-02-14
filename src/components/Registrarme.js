@@ -1,9 +1,12 @@
 import React, { Component } from 'react'
 
 import './../css/components/entrar.css';
+//------------- IMGs ------------------------------------------------------
+import Icon from './../img/icon-navbar.png'
 import { Link } from 'react-router-dom';
 import {Alert} from 'reactstrap'
 import axios from 'axios';
+import Spinner from './../assets/Spinner';
 
 export default class Registrarme extends Component {
     
@@ -18,12 +21,20 @@ export default class Registrarme extends Component {
             alert_open: false,
             alert_color: '',
             alert_message: '',
+            spinner: false
         };
 
-        this.handleEmail = this.handleEmail.bind(this)
-        this.handleName = this.handleName.bind(this)
-        this.handlePassword = this.handlePassword.bind(this)
-        this.handlePasswordRepeat = this.handlePasswordRepeat.bind(this)
+        const METHODS = [
+            'handleEmail',
+            'handleName',
+            'handlePassword',
+            'handlePasswordRepeat'
+        ];
+
+        METHODS.forEach((method)=>{
+            this[method] = this[method].bind(this);
+        })
+
     }
 
     handleName = (e)=>{
@@ -63,8 +74,12 @@ export default class Registrarme extends Component {
 
         if(name !== "" && email !== "" && password !== "" && confirmPassword !== ""){
             if(password === confirmPassword){
+                
+                this.setState({
+                    spinner: true
+                });
 
-                const datas = await axios({
+                await axios({
                         method: 'POST',
                         url: this.state.url_backend,
                         data: {
@@ -73,31 +88,37 @@ export default class Registrarme extends Component {
                             password: this.state.password,
                             register: register
                         }
-                    });
-                if(datas.data['status'] === "200"){
-                    this.setState({
-                        alert_open: true,
-                        alert_color: 'primary',
-                        alert_message: datas.data['message']
-                    });
-                    this.props.history.push('/entrar/success');
-                }
-                
-                if(datas.data['status'] === '300'){
-                    this.setState({
-                        alert_open: true,
-                        alert_color: 'warning',
-                        alert_message: datas.data['message']
-                    });    
-                }
-
-                if(datas.data['status'] === '400'){
-                    this.setState({
-                        alert_open: true,
-                        alert_color: 'danger',
-                        alert_message: datas.data['message']
-                    });
-                }
+                }).then((datas)=>{
+                    if(datas.data['status'] === "200"){
+                        this.setState({
+                            alert_open: true,
+                            alert_color: 'primary',
+                            alert_message: datas.data['message']
+                        });
+                        this.setState({
+                            spinner: false
+                        });
+                        this.props.history.push('/entrar/success');
+                    }
+                    
+                    if(datas.data['status'] === '300'){
+                        this.setState({
+                            alert_open: true,
+                            alert_color: 'warning',
+                            alert_message: datas.data['message']
+                        });    
+                    }
+    
+                    if(datas.data['status'] === '400'){
+                        this.setState({
+                            alert_open: true,
+                            alert_color: 'danger',
+                            alert_message: datas.data['message']
+                        });
+                    }
+                }).catch((err)=>{
+                    console.log(err);
+                })
             }else{
                 this.setState({
                     alert_open: true,
@@ -115,13 +136,16 @@ export default class Registrarme extends Component {
     }
 
     componentDidMount = ()=>{
-        this.redirectApp();
     }
 
-    redirectApp = ()=>{
-        // setInterval(()=>{
-
-        // }, 1000);
+    getSpinner = ()=>{
+        setInterval(()=>{
+            if(this.state.spinner){
+                return(
+                    <Spinner />
+                )
+            }
+        }, 500)
     }
 
     toggleAlert = ()=>{
@@ -133,6 +157,56 @@ export default class Registrarme extends Component {
     render(props) {
         return (
             <div>
+            <header>
+            <nav className="navbar navbar-expand-lg navbar-light bg-white fixed-top">
+                <Link to="/" className="m-2">
+                    <img src={Icon} className="img" alt="Logo navbar"/>
+                </Link>
+                <button 
+                    className="navbar-toggler mr-2 color-primary" 
+                    type="button"
+                    data-toggle="collapse" 
+                    data-target="#navbarSupportedContent1" 
+                    aria-controls="navbarSupportedContent1" 
+                    aria-expanded="false" 
+                    aria-label="Toggle navigation"
+                > 
+                    <span className="navbar-toggler-icon"></span> 
+                </button>
+                <div className="collapse navbar-collapse" id="navbarSupportedContent1">
+                    <ul className="navbar-nav ml-auto mr-2">
+                        <li className="nav-item active"> 
+                            <Link className="nav-link" to="/">Inicio</Link> 
+                        </li>
+                        <li className="nav-item"> 
+                            <Link className="nav-link" to="/tutores">Tutores</Link> 
+                        </li>
+                        <li className="nav-item dropdown"> 
+                            <Link
+                                className="nav-link dropdown-toggle" 
+                                to="/" 
+                                id="navbarDropdown1" 
+                                role="button" 
+                                data-toggle="dropdown" 
+                                aria-haspopup="true" 
+                                aria-expanded="false"> 
+                                Cursos 
+                            </Link>
+                            <div className="dropdown-menu" aria-labelledby="navbarDropdown1"> 
+                                <Link className="dropdown-item" to="/mecatronica">Mecatronica</Link> 
+                                <Link className="dropdown-item" to="/diseño">Diseño</Link>
+                                <div className="dropdown-divider"></div>
+                                <Link className="dropdown-item" to="/matematicas">matematicas</Link>
+                                <Link className="dropdown-item" to="/fisica">fisica</Link>
+                            </div>
+                        </li>
+                        <li className="nav-item mr-5"> 
+                            <Link className="nav-link" to="/entrar">Entrar</Link> 
+                        </li>
+                    </ul>
+                </div>
+            </nav>
+        </header>
                 <div className="container-fluid entrar-banner d-flex justify-content-center align-items-center">
                     <div className="col-12 col-sm-8 col-md-5 col-lg-5 mt-5">
                     <Alert 

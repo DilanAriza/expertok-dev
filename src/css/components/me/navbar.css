@@ -1,0 +1,21 @@
+.header {
+  width: 100%;
+}
+
+.header .navbar {
+  padding: 7px 0;
+  padding-left: 10px;
+}
+
+.header .navbar .img {
+  width: 190px;
+  height: 50px;
+}
+
+@media only screen and (min-width: 320px) {
+  .header .navbar {
+    padding: 0;
+    padding-left: 3px;
+  }
+}
+/*# sourceMappingURL=navbar.css.map */
