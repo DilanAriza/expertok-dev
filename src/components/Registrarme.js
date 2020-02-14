@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 
 import './../css/components/entrar.css';
+import './../css/components/spinner.css'
 //------------- IMGs ------------------------------------------------------
 import Icon from './../img/icon-navbar.png'
 import { Link } from 'react-router-dom';
@@ -20,8 +21,7 @@ export default class Registrarme extends Component {
             confirmPassword:'',
             alert_open: false,
             alert_color: '',
-            alert_message: '',
-            spinner: false
+            alert_message: ''
         };
 
         const METHODS = [
@@ -74,11 +74,8 @@ export default class Registrarme extends Component {
 
         if(name !== "" && email !== "" && password !== "" && confirmPassword !== ""){
             if(password === confirmPassword){
-                
-                this.setState({
-                    spinner: true
-                });
-
+                var spinner = document.getElementById('spinner');
+                spinner.classList.remove('d-none');
                 await axios({
                         method: 'POST',
                         url: this.state.url_backend,
@@ -95,13 +92,11 @@ export default class Registrarme extends Component {
                             alert_color: 'primary',
                             alert_message: datas.data['message']
                         });
-                        this.setState({
-                            spinner: false
-                        });
                         this.props.history.push('/entrar/success');
                     }
                     
                     if(datas.data['status'] === '300'){
+                        spinner.classList.add('d-none');
                         this.setState({
                             alert_open: true,
                             alert_color: 'warning',
@@ -110,6 +105,7 @@ export default class Registrarme extends Component {
                     }
     
                     if(datas.data['status'] === '400'){
+                        spinner.classList.add('d-none');
                         this.setState({
                             alert_open: true,
                             alert_color: 'danger',
@@ -136,16 +132,6 @@ export default class Registrarme extends Component {
     }
 
     componentDidMount = ()=>{
-    }
-
-    getSpinner = ()=>{
-        setInterval(()=>{
-            if(this.state.spinner){
-                return(
-                    <Spinner />
-                )
-            }
-        }, 500)
     }
 
     toggleAlert = ()=>{
@@ -207,6 +193,14 @@ export default class Registrarme extends Component {
                 </div>
             </nav>
         </header>
+                <div className="Spinner d-none" id="spinner">
+                    <div className="loadingio-spinner-ripple-8daw83y7grw">
+                        <div className="ldio-64ryit8n18r">
+                            <div></div>
+                            <div></div>
+                        </div>
+                    </div>
+                </div>
                 <div className="container-fluid entrar-banner d-flex justify-content-center align-items-center">
                     <div className="col-12 col-sm-8 col-md-5 col-lg-5 mt-5">
                     <Alert 

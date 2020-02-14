@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 
 import './../css/components/entrar.css';
+import './../css/components/spinner.css'
 //------------- IMGs ------------------------------------------------------
 import Icon from './../img/icon-navbar.png'
 
@@ -9,12 +10,13 @@ import { Link } from 'react-router-dom';
 
 //React Strap  ----------------------------------------------------
 import { Alert } from 'reactstrap'
+
 //Axios -----------------------------------------------------------
 import axios from 'axios';
+
 //Cookies ---------------------------------------------------------
 import Cookies from 'universal-cookie';
 const cookies = new Cookies();
-
 
 export default class Entrar extends Component {
     
@@ -92,6 +94,8 @@ export default class Entrar extends Component {
         const password = this.state.password;
 
         if(email !== '' && password !== ''){
+            var spinner = document.getElementById('spinner');
+            spinner.classList.remove('d-none');
             const responseServer = await axios({
                 method: 'POST',
                 url: this.state.backend_url,
@@ -114,6 +118,7 @@ export default class Entrar extends Component {
             }
             
             if(responseServer.data['status'] === '300'){
+                spinner.classList.add('d-none');
                 this.setState({
                     alert_open: true,
                     alert_color: 'warning',
@@ -122,6 +127,7 @@ export default class Entrar extends Component {
             }
 
             if(responseServer.data['status'] === '400'){
+                spinner.classList.add('d-none');
                 this.setState({
                     alert_open: true,
                     alert_color: 'danger',
@@ -190,6 +196,14 @@ export default class Entrar extends Component {
                     </div>
                 </nav>
             </header>
+                <div className="Spinner d-none" id="spinner">
+                    <div className="loadingio-spinner-ripple-8daw83y7grw">
+                        <div className="ldio-64ryit8n18r">
+                            <div></div>
+                            <div></div>
+                        </div>
+                    </div>
+                </div>
                 <div className="container-fluid entrar-banner d-flex justify-content-center align-items-center">
                     <div className="col-12 col-sm-8 col-md-5 col-lg-5">
                         <Alert 

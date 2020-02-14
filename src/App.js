@@ -3,13 +3,13 @@ import React, {Component} from 'react';
 import {
     BrowserRouter as Router,
     Switch,
-    Route,
-    Link
+    Route
 } from "react-router-dom";
 import IndexSing from './components/IndexSing';
 import Home from './Home';
 import Entrar from './components/Entrar';
 import Registrarme from './components/Registrarme';
+import Upload from './components/Upload';
 import GetCookieAll from './components/production/GetCookieAll';
 
 export default class App extends Component {
@@ -88,6 +88,18 @@ export default class App extends Component {
                         component={
                             (props)=>
                                 <IndexSing
+                                {...props}
+                                url_backend={this.state.url_backend}
+                                />
+                        }
+                    >
+                    </Route>
+                    <Route
+                        exact 
+                        path="/upload"
+                        component={
+                            (props)=>
+                                <Upload
                                 {...props}
                                 url_backend={this.state.url_backend}
                                 />

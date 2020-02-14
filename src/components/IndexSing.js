@@ -1,7 +1,6 @@
 import React, { Component } from 'react'
 import Me from './me/Me';
 import Navbar from './me/Navbar';
-import GetAuth from './me/GetAuth';
 
 
 export default class IndexSing extends Component {
