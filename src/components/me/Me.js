@@ -85,7 +85,7 @@ export default class Me extends Component {
                             Lorem ipsum, dolor sit amet consectetur adipisicing elit. Fugiat aliquid hic laboriosam delectus, enim, veniam, quibusdam unde tenetur deleniti labore sit commodi recusandae et? Modi deleniti numquam illum officia voluptatum!
                         </div>
                         <div className="col-12">
-                            <video src="https://firebasestorage.googleapis.com/v0/b/expertok-7da90.appspot.com/o/videos%2F2020-01-09_01-44-05.mp4?alt=media&token=184e6978-b0bf-48dc-a142-d23a4ca06f9c" controls width="1050px" height="600px"></video>
+                            {/* <video src="https://firebasestorage.googleapis.com/v0/b/expertok-7da90.appspot.com/o/videos%2F2020-01-09_01-44-05.mp4?alt=media&token=184e6978-b0bf-48dc-a142-d23a4ca06f9c" controls width="1050px" height="600px"></video> */}
                         </div>
                     </div>
                 </div>

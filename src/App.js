@@ -96,6 +96,18 @@ export default class App extends Component {
                     </Route>
                     <Route
                         exact 
+                        path="/me/categorias/"
+                        component={
+                            (props)=>
+                                <IndexSing
+                                {...props}
+                                url_backend={this.state.url_backend}
+                                />
+                        }
+                    >
+                    </Route>
+                    <Route
+                        exact 
                         path="/upload"
                         component={
                             (props)=>
