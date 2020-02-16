@@ -15,6 +15,7 @@ import axios from 'axios';
 
 //Cookies ---------------------------------------------------------
 import Cookies from 'universal-cookie';
+import NavbarGeneral from './../NavbarGeneral/';
 const cookies = new Cookies();
 
 
@@ -156,7 +157,7 @@ export default class Entrar extends Component {
     render(props) {
         return (
             <div>
-                
+                <NavbarGeneral />
                 <div className="Spinner d-none" id="spinner">
                     <div className="loadingio-spinner-ripple-8daw83y7grw">
                         <div className="ldio-64ryit8n18r">
