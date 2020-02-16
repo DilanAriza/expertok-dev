@@ -11,6 +11,7 @@ import Entrar from './components/Entrar';
 import Registrarme from './components/Registrarme';
 import Upload from './components/Upload';
 import GetCookieAll from './components/production/GetCookieAll';
+import CategoriaBachillerato from './components/me/CategoriaBachillerato';
 
 export default class App extends Component {
     
@@ -96,7 +97,31 @@ export default class App extends Component {
                     </Route>
                     <Route
                         exact 
-                        path="/me/categorias/"
+                        path="/me/categorias/bachillerato"
+                        component={
+                            (props)=>
+                                <CategoriaBachillerato
+                                {...props}
+                                url_backend={this.state.url_backend}
+                                />
+                        }
+                    >
+                    </Route>
+                    <Route
+                        exact 
+                        path="/me/categorias/jornada-fortalecida"
+                        component={
+                            (props)=>
+                                <IndexSing
+                                {...props}
+                                url_backend={this.state.url_backend}
+                                />
+                        }
+                    >
+                    </Route>
+                    <Route
+                        exact 
+                        path="/me/categorias/profesional"
                         component={
                             (props)=>
                                 <IndexSing

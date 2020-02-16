@@ -54,21 +54,21 @@ export default class Me extends Component {
                         <h2 className="title-intro">Categorias</h2>
                         <div className="row medl-pather">
                             <div className="col-12 col-sm-4 m-0 p-2 medle-children">
-                                <Link to="/categorias/bachillerato" className="card">
+                                <Link to="/me/categorias/bachillerato" className="card">
                                     <div className="card-body text-center">
                                         Bachillerato
                                     </div>
                                 </Link>
                             </div>
                             <div className="col-12 col-sm-4 m-0 p-2 medle-children">
-                                <Link to="/categorias/jornada-fortalecida" className="card">
+                                <Link to="/me/categorias/jornada-fortalecida" className="card">
                                     <div className="card-body text-center">
                                         Jornada Fortalecida
                                     </div>
                                 </Link>
                             </div>
                             <div className="col-12 col-sm-4 m-0 p-2 medle-children">
-                                <Link to="/categorias/profesional" className="card">
+                                <Link to="/me/categorias/profesional" className="card">
                                     <div className="card-body text-center">
                                         Personal/profesional
                                     </div>
