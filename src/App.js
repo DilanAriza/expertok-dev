@@ -7,11 +7,11 @@ import {
 } from "react-router-dom";
 import IndexSing from './components/IndexSing';
 import Home from './Home';
-import Entrar from './components/Entrar';
-import Registrarme from './components/Registrarme';
-import Upload from './components/Upload';
-import GetCookieAll from './components/production/GetCookieAll';
-import CategoriaBachillerato from './components/me/CategoriaBachillerato';
+// import Entrar from './components/Entrar/Entrar';
+// import Registrarme from './components/Registrarme';
+// import Upload from './components/Upload';
+// import GetCookieAll from './components/production/GetCookieAll';
+// import CategoriaBachillerato from './components/me/CategoriaBachillerato';
 
 export default class App extends Component {
     
@@ -38,7 +38,7 @@ export default class App extends Component {
                         }
                     >
                     </Route>
-                    <Route
+                    {/* <Route
                         exact 
                         path="/entrar"
                         component={
@@ -142,8 +142,8 @@ export default class App extends Component {
                                 />
                         }
                     >
-                    </Route>
-                </Switch>
+                    </Route> */}
+                </Switch> 
             </Router>
         )
     }
