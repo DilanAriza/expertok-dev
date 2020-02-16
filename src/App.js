@@ -1,151 +1,71 @@
-import React, {Component} from 'react';
-//------------- React Router ---------------------------------------------
-import {
-    BrowserRouter as Router,
-    Switch,
-    Route
-} from "react-router-dom";
-import IndexSing from './components/IndexSing';
+import React, { Component } from 'react'
+import {BrowserRouter, Route} from 'react-router-dom'
 import Home from './Home';
-// import Entrar from './components/Entrar/Entrar';
-// import Registrarme from './components/Registrarme';
-// import Upload from './components/Upload';
-// import GetCookieAll from './components/production/GetCookieAll';
-// import CategoriaBachillerato from './components/me/CategoriaBachillerato';
+import Entrar from './components/Entrar/'
+import Registrarme from './components/Registrarme';
 
-export default class App extends Component {
-    
-    constructor(props){
+class App extends Component{
+    constructor (props){
         super(props);
-        this.state={
-            url_backend:'https://expertok-backend.herokuapp.com/'
-        }
     }
 
-    render() {
-        return (
-            <Router>
-                <Switch>
-                    <Route
-                        exact 
-                        path="/"
-                        component={
-                            (props)=>
-                                <Home
-                                {...props}
-                                url_backend={this.state.url_backend}
-                                />
-                        }
-                    >
-                    </Route>
-                    {/* <Route
-                        exact 
-                        path="/entrar"
-                        component={
-                            (props)=>
-                                <Entrar
-                                {...props}
-                                url_backend={this.state.url_backend}
-                                />
-                        }
-                    >
-                    </Route>
-                    <Route
-                        exact 
-                        path="/registrarme"
-                        component={
-                            (props)=>
-                                <Registrarme
-                                {...props}
-                                url_backend={this.state.url_backend}
-                                />
-                        }
-                    >
-                    </Route>
-                    <Route 
-                        path="/entrar/:register" 
-                        component={
-                            (props)=>
-                            <Entrar 
-                                {...props} 
-                                url_backend={this.state.url_backend}
-                            />
-                        }
-                    ></Route>
-                    <Route 
-                        path="/cookie" 
-                        component={
-                            (props)=>
-                            <GetCookieAll 
-                                {...props} 
-                                url_backend={this.state.url_backend}
-                            />
-                        }
-                    >
-                    </Route>
-                    <Route
-                        exact 
-                        path="/me"
-                        component={
-                            (props)=>
-                                <IndexSing
-                                {...props}
-                                url_backend={this.state.url_backend}
-                                />
-                        }
-                    >
-                    </Route>
-                    <Route
-                        exact 
-                        path="/me/categorias/bachillerato"
-                        component={
-                            (props)=>
-                                <CategoriaBachillerato
-                                {...props}
-                                url_backend={this.state.url_backend}
-                                />
-                        }
-                    >
-                    </Route>
-                    <Route
-                        exact 
-                        path="/me/categorias/jornada-fortalecida"
-                        component={
-                            (props)=>
-                                <IndexSing
-                                {...props}
-                                url_backend={this.state.url_backend}
-                                />
-                        }
-                    >
-                    </Route>
-                    <Route
-                        exact 
-                        path="/me/categorias/profesional"
-                        component={
-                            (props)=>
-                                <IndexSing
-                                {...props}
-                                url_backend={this.state.url_backend}
-                                />
-                        }
-                    >
-                    </Route>
-                    <Route
-                        exact 
-                        path="/upload"
-                        component={
-                            (props)=>
-                                <Upload
-                                {...props}
-                                url_backend={this.state.url_backend}
-                                />
-                        }
-                    >
-                    </Route> */}
-                </Switch> 
-            </Router>
+    render(){
+        return(
+            <BrowserRouter>
+                <Route
+                    exact={true} 
+                    path="/"
+                >
+                    <Home
+                        {...this.props}
+                        url_backend="back"
+                    />
+                </Route>
+                <Route 
+                    exact={true} 
+                    path="/entrar"
+                >
+                    <Entrar url_backend="back"/>
+                </Route>
+                <Route 
+                    exact={true} 
+                    path="/"
+                >
+                    <Registrarme url_backend="back"/>
+                </Route>
+            </BrowserRouter> 
         )
     }
 }
 
+// const App = ()=>{
+//     return(
+//         <BrowserRouter>
+//             <Route
+//                 exact={true} 
+//                 path="/"
+//             >
+//                 <Home
+//                     url_backend="back"
+//                 />
+//             </Route>
+//             <Route 
+//                 exact={true} 
+//                 path="/"
+//             >
+//                 <Entrar url_backend="back"/>
+//             </Route><Route 
+//                 exact={true} 
+//                 path="/"
+//             >
+//                 <Registrarme url_backend="back"/>
+//             </Route>
+//             {/* <Route 
+//                 path="/register" 
+//                 component={Register}
+//             /> */}
+//         </BrowserRouter>
+//     )
+// }
+
+export default App;

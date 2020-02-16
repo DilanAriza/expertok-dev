@@ -1,22 +1,17 @@
-import React, { Component, Suspense } from 'react'
+import React, { Component} from 'react'
+import 'bootstrap/dist/css/bootstrap.min.css';
+import 'bootstrap/dist/js/bootstrap.min.js';
 import './css/home.index.css';
 import './css/home.banner.css';
 //------------- IMGs ------------------------------------------------------
 import Icon from './img/icon-navbar.png'
 import { Link } from 'react-router-dom';
-import Spinner from './assets/Spinner';
 
 export default class Home extends Component {
     
-    getSpinner = ()=>{
-        return(
-            <Spinner />
-        )
-    }
 
     render() {
         return (
-            <Suspense fallback={this.getSpinner}>
             <div className="div">
             <header>
                 <nav className="navbar navbar-expand-lg navbar-light bg-white fixed-top">
@@ -187,7 +182,6 @@ export default class Home extends Component {
                 </div>
             </div>
         </div>
-        </Suspense>
         )
     }
 }

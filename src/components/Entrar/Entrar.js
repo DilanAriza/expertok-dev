@@ -1,9 +1,10 @@
 import React, { Component } from 'react'
-
-import './../css/components/entrar.css';
-import './../css/components/spinner.css'
+import 'bootstrap/dist/css/bootstrap.min.css';
+import 'bootstrap/dist/js/bootstrap.min.js';
+import './../../css/components/entrar.css';
+import './../../css/components/spinner.css'
 //------------- IMGs ------------------------------------------------------
-import Icon from './../img/icon-navbar.png'
+import Icon from './../../img/icon-navbar.png'
 
 //React router ----------------------------------------------------
 import { Link } from 'react-router-dom';
@@ -17,6 +18,7 @@ import axios from 'axios';
 //Cookies ---------------------------------------------------------
 import Cookies from 'universal-cookie';
 const cookies = new Cookies();
+
 
 export default class Entrar extends Component {
     
@@ -42,16 +44,17 @@ export default class Entrar extends Component {
     }
 
     componentWillMount = ()=>{
-        if(this.props.match.params.register){
-            const paramRegister = this.props.match.params.register;
-            if(paramRegister === "success"){
-                this.setState({
-                    alert_color: 'success',
-                    alert_message: 'Te registraste correctamente',
-                    alert_open: true
-                });
-            }
-        }
+        // if(this.props.match.params.register){
+        //     const paramRegister = this.props.match.params.register;
+        //     if(paramRegister === "success"){
+        //         this.setState({
+        //             alert_color: 'success',
+        //             alert_message: 'Te registraste correctamente',
+        //             alert_open: true
+        //         });
+        //     }
+        // }
+        console.log(this.props);
     }
 
     toggleAlert = ()=>{
@@ -144,6 +147,8 @@ export default class Entrar extends Component {
     }
 
     render(props) {
+        
+    console.log('entrar');
         return (
             <div>
                 <header>
