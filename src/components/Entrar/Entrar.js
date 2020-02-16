@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap/dist/js/bootstrap.min.js';
 import './assets/css/entrar.css';
-// import './../../css/components/spinner.css'
+import './../Spinner/assets/css/spinner.css';
 
 //React router ----------------------------------------------------
 import { Link } from 'react-router-dom';
