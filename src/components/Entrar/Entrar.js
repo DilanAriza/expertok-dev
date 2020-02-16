@@ -40,19 +40,10 @@ export default class Entrar extends Component {
         METHODS.forEach((method)=>{
             this[method] = this[method].bind(this);
         });
-        // if(this.props.match.params.register){
-        //     const paramRegister = this.props.match.params.register;
-        //     if(paramRegister === "success"){
-        //         this.setState({
-        //             alert_color: 'success',
-        //             alert_message: 'Te registraste correctamente',
-        //             alert_open: true
-        //         });
-        //     }
-        // }
     }
 
     componentWillMount = ()=>{
+        
         if(this.props.match.params.register){
             const paramRegister = this.props.match.params.register;
             if(paramRegister === "success"){

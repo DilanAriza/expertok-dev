@@ -9,7 +9,7 @@ class App extends Component{
     constructor(props){
         super(props);
         this.state={
-            url_backend: "http://localhost:4000/"
+            url_backend: "http://expertok-backend.herokuapp.com/"
         }
     }
     render(){
@@ -40,6 +40,23 @@ class App extends Component{
                                 return(
                                     <Entrar
                                         {...props}
+                                        url_backend={this.state.url_backend}
+                                    />
+                                )
+                            }
+                        }
+                    }
+                />
+                <Route 
+                    exact
+                    path="/entrar/:register"
+                    component={
+                        (props, match)=>{
+                            if(match){
+                                return(
+                                    <Entrar
+                                        {...props}
+                                        register={'success'}
                                         url_backend={this.state.url_backend}
                                     />
                                 )
