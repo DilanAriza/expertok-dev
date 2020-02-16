@@ -1,25 +1,23 @@
-import React, { Component } from '/react'
+import React, { Component } from 'react'
 
 import {
-    BrowserRouter as Router,
-    Switch,
-    Route,
     Link
 } from "react-router-dom";
 
 //assets ---------------------------------------------------
-import './../../css/components/me/navbar.css';
-import Icon from './../../img/icon-navbar.png';
+import './assets/css/navbar.css';
+import Icon from './assets/img/icon-navbar.png';
 
 import Cookies from 'universal-cookie'
 const cookies = new Cookies();
 
-export default class Navbar extends Component {
-    
+export default class NavbarUser extends Component {
+    // constructor (props){
+    //     super(props);
+    //     this.state={
 
-    constructor (props){
-        super(props);
-    }
+    //     }
+    // }
 
     destroySession = ()=>{
         cookies.remove('Auth');
@@ -27,9 +25,7 @@ export default class Navbar extends Component {
         cookies.remove('userData');
         this.props.history.push('/');
     }
-
-    componentDidMount = ()=>{
-    }
+    
     render() {
         return (
             <div className="header fixed-top">

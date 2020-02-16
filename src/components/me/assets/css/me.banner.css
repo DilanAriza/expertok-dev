@@ -1,6 +1,6 @@
 .me-banner {
   position: relative;
-  background: url(./../../../img//banner.3.jpg);
+  background: url(./../img/banner.3.jpg);
   min-height: 20vh;
   max-height: 20vh;
   background-size: cover;

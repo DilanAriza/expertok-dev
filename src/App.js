@@ -3,10 +3,14 @@ import {BrowserRouter, Route} from 'react-router-dom'
 import Home from './components/Home/';
 import Entrar from './components/Entrar/'
 import Registrarme from './components/Registrarme/';
+import Me from './components/Me/'
 
 class App extends Component{
     constructor(props){
         super(props);
+        this.state={
+            url_backend: "https://expertok-backend.herokuapp.com/"
+        }
     }
     render(){
         return(
@@ -20,7 +24,7 @@ class App extends Component{
                                 return(
                                     <Home
                                         {...props}
-                                        url_backend="back"
+                                        url_backend={this.state.url_backend}
                                     />
                                 )
                             }
@@ -36,7 +40,7 @@ class App extends Component{
                                 return(
                                     <Entrar
                                         {...props}
-                                        url_backend="back"
+                                        url_backend={this.state.url_backend}
                                     />
                                 )
                             }
@@ -52,7 +56,23 @@ class App extends Component{
                                 return(
                                     <Registrarme
                                         {...props}
-                                        url_backend="back"
+                                        url_backend={this.state.url_backend}
+                                    />
+                                )
+                            }
+                        }
+                    }
+                />
+                <Route 
+                    exact
+                    path="/me"
+                    component={
+                        (props, match)=>{
+                            if(match){
+                                return(
+                                    <Me
+                                        {...props}
+                                        url_backend={this.state.url_backend}
                                     />
                                 )
                             }
@@ -64,34 +84,5 @@ class App extends Component{
     }
 }
 
-// const App = ()=>{
-//     return(
-//         <BrowserRouter>
-//             <Route
-//                 exact={true} 
-//                 path="/"
-//             >
-//                 <Home
-//                     url_backend="back"
-//                 />
-//             </Route>
-//             <Route 
-//                 exact={true} 
-//                 path="/"
-//             >
-//                 <Entrar url_backend="back"/>
-//             </Route><Route 
-//                 exact={true} 
-//                 path="/"
-//             >
-//                 <Registrarme url_backend="back"/>
-//             </Route>
-//             {/* <Route 
-//                 path="/register" 
-//                 component={Register}
-//             /> */}
-//         </BrowserRouter>
-//     )
-// }
 
 export default App;

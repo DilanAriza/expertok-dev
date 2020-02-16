@@ -1,11 +1,11 @@
 import React, { Component } from 'react'
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap/dist/js/bootstrap.min.js';
-import './../../css/components/me/me.banner.css';
-import  './../../css/components/me/me.index.css';
-import shoping from './../../img/compras.svg';
+import './assets/css/me.banner.css';
+import './assets/css/me.index.css';
+import shoping from './assets/img/compras.svg';
 
-import $ from 'jquery';
+import NavbarUser from './../NavbarUser/'
 import { Link } from 'react-router-dom';
 
 import Cookies from 'universal-cookie'
@@ -15,14 +15,15 @@ export default class Me extends Component {
     constructor (props){
         super(props);
         this.state={
-            url_backend: this.props.url_backend
+            url_backend: this.props.url_backend,
+            props_father: this.props
         }
     }
 
     componentDidMount = () => {
         const userData = cookies.getAll();
         if(userData){
-            if(userData.Auth == 'true'){
+            if(userData.Auth === 'true'){
                 console.log(userData);
             }else{
                 this.props.history.push('/');
@@ -32,6 +33,7 @@ export default class Me extends Component {
     render() {
         return (
             <div>
+                <NavbarUser {...this.state.props_father}/>
                 <div className="container-fluid m-0 p-0">
                     <div className="me-banner">
                         <div className="container">
