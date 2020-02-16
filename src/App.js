@@ -1,38 +1,64 @@
 import React, { Component } from 'react'
 import {BrowserRouter, Route} from 'react-router-dom'
-import Home from './Home';
+import Home from './components/Home/';
 import Entrar from './components/Entrar/'
-import Registrarme from './components/Registrarme';
+import Registrarme from './components/Registrarme/';
 
 class App extends Component{
-    constructor (props){
+    constructor(props){
         super(props);
     }
-
     render(){
         return(
             <BrowserRouter>
                 <Route
-                    exact={true} 
+                    exact={true}
                     path="/"
-                >
-                    <Home
-                        {...this.props}
-                        url_backend="back"
-                    />
-                </Route>
+                    component={
+                        (props, match)=>{
+                            if(match){
+                                return(
+                                    <Home
+                                        {...props}
+                                        url_backend="back"
+                                    />
+                                )
+                            }
+                        }
+                    }
+                />
                 <Route 
-                    exact={true} 
+                    exact
                     path="/entrar"
-                >
-                    <Entrar url_backend="back"/>
-                </Route>
+                    component={
+                        (props, match)=>{
+                            if(match){
+                                return(
+                                    <Entrar
+                                        {...props}
+                                        url_backend="back"
+                                    />
+                                )
+                            }
+                        }
+                    }
+                />
                 <Route 
-                    exact={true} 
-                    path="/"
-                >
-                    <Registrarme url_backend="back"/>
-                </Route>
+                    exact
+                    path="/registrarme"
+                    component={
+                        (props, match)=>{
+                            if(match){
+                                return(
+                                    <Registrarme
+                                        {...props}
+                                        url_backend="back"
+                                    />
+                                )
+                            }
+                        }
+                    }
+                />
             </BrowserRouter> 
         )
     }

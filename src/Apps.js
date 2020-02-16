@@ -5,7 +5,7 @@ import {
     Switch,
     Route
 } from "react-router-dom";
-import IndexSing from './components/IndexSing';
+// import IndexSing from './components/IndexSing';
 import Home from './Home';
 // import Entrar from './components/Entrar/Entrar';
 // import Registrarme from './components/Registrarme';
