@@ -3,7 +3,7 @@ import {BrowserRouter, Route} from 'react-router-dom'
 import Home from './components/Home/';
 import Entrar from './components/Entrar/'
 import Registrarme from './components/Registrarme/';
-import Me from './components/Me/Me'
+// import Me from './components/Me/Me'
 
 class App extends Component{
     constructor(props){
