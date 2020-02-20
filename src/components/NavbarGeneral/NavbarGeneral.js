@@ -1,12 +1,13 @@
 import React, { Component } from 'react'
 import {Link} from 'react-router-dom'
 import Icon from './assets/img/icon-navbar.png';
+import './assets/css/navbar.css';
 
 export default class NavbarGeneral extends Component {
     render() {
         return (
                 <header>
-                <nav className="navbar navbar-expand-lg navbar-light bg-white fixed-top">
+                <nav className="navbar navbar-general navbar-expand-lg navbar-light bg-white fixed-top">
                     <Link to="/" className="m-2">
                         <img src={Icon} className="img" alt="Logo navbar"/>
                     </Link>
