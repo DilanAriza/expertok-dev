@@ -9,7 +9,7 @@ class App extends Component{
     constructor(props){
         super(props);
         this.state={
-            url_backend: "http://expertok-backend.herokuapp.com/"
+            url_backend: "https://expertok-backend.herokuapp.com/"
         }
     }
     render(){
