@@ -1,0 +1,63 @@
+.intro-me {
+  margin-top: 8vh;
+}
+
+.intro-me .title-intro {
+  color: #007bff;
+  text-align: center;
+  text-transform: capitalize;
+}
+
+.intro-me p {
+  text-align: center;
+  font-size: 18px;
+  color: #07121d;
+  margin: 0 25vw;
+  margin-bottom: 10px;
+}
+
+.intro-me .medl-pather {
+  background: #007bff;
+}
+
+.intro-me .medl-pather .medle-children {
+  background: #fff;
+}
+
+.intro-me .medl-pather .medle-children .card {
+  border: 1px solid #007bff;
+  text-decoration: none;
+  color: #007bff;
+  font-size: 20px;
+  -webkit-transition: .3s ease all;
+  transition: .3s ease all;
+}
+
+.intro-me .medl-pather .medle-children .card:hover {
+  color: #fff;
+  background: #007bff;
+  -webkit-transition: .3s ease all;
+  transition: .3s ease all;
+}
+
+.header-compras i .path {
+  fill: #007bff;
+}
+
+.header-compras i img {
+  margin-top: 10px;
+  width: 30px;
+  height: 30px;
+  margin: 10px;
+}
+
+@media only screen and (min-width: 320px) {
+  .banner-text {
+    margin: 20px 0;
+    border-radius: 0;
+  }
+  h2 {
+    font-size: 2em !important;
+  }
+}
+/*# sourceMappingURL=me.index.css.map */

@@ -1,0 +1,63 @@
+.me-banner {
+  position: relative;
+  background: url(./../img/banner.3.jpg);
+  min-height: 20vh;
+  max-height: 20vh;
+  background-size: cover;
+  background-position: cover;
+  background-attachment: fixed;
+  padding: 100px 0 200px;
+  color: white;
+}
+
+.me-banner .banner-text {
+  background: rgba(255, 255, 255, 0.815);
+}
+
+.me-banner .banner-text h2 {
+  margin: 10px !important;
+  text-transform: uppercase;
+  margin: 0;
+  padding: 0;
+  font-size: 2.5em;
+  color: #007bff;
+}
+
+.me-banner .banner-text p {
+  font-size: 1.8em;
+  margin-top: 10px;
+  margin-right: 10px;
+  margin-left: 10px;
+}
+
+.me-banner .banner-text .link {
+  margin-bottom: 20px;
+  margin-left: 10px;
+  padding: 10px 20px;
+  display: inline-block;
+  background: #ffffff;
+  color: #007bff;
+  text-decoration: none;
+  -webkit-transition: ease .3s all;
+  transition: ease .3s all;
+  -webkit-transform: translateY(0);
+          transform: translateY(0);
+}
+
+.me-banner .banner-text .link:hover {
+  -webkit-transition: ease .3s all;
+  transition: ease .3s all;
+  -webkit-transform: translateY(-4px);
+          transform: translateY(-4px);
+}
+
+@media only screen and (min-width: 320px) {
+  .banner-text {
+    margin: 20px 0;
+    border-radius: 0;
+  }
+  h2 {
+    font-size: 2em !important;
+  }
+}
+/*# sourceMappingURL=me.banner.css.map */
