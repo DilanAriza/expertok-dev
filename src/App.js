@@ -81,14 +81,14 @@ class App extends Component{
                         }
                     }
                 />
-                {/* <Route 
+                <Route 
                     exact
                     path="/me"
                     component={
                         (props, match)=>{
                             if(match){
                                 return(
-                                    <Me
+                                    <UserHome
                                         {...props}
                                         url_backend={this.state.url_backend}
                                     />
@@ -96,7 +96,7 @@ class App extends Component{
                             }
                         }
                     }
-                /> */}
+                />
             </BrowserRouter> 
         )
     }
