@@ -4,6 +4,7 @@ import Home from './components/Home/';
 import Entrar from './components/Entrar/';
 import Registrarme from './components/Registrarme/';
 // import Me from './components/Me/Me';
+import UserHome from './components/UserHome/'
 
 class App extends Component{
     constructor(props){
