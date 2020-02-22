@@ -72,7 +72,7 @@ export default class NavbarUser extends Component {
                                 </div>
                             </li>
                             <li className="nav-item"> 
-                                <button onClick={this.destroySession} className="nav-link mr-3 text-dager">
+                                <button onClick={this.destroySession} className="btn nav-link mr-3 text-danger">
                                     Salir
                                 </button>
                             </li>
