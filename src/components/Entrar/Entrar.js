@@ -24,7 +24,10 @@ export default class Entrar extends Component {
     constructor(props){
         super(props);
         this.state={
-            backend_url: this.props.url_backend + 'login/login',
+            backend_url: this.props.url_backend + 'login/login/',
+            backend_url_login: '',
+            login_title: this.props.title,
+            for: this.props.for,
             email:'',
             password:'',
             alert_open: false,
@@ -40,10 +43,10 @@ export default class Entrar extends Component {
         METHODS.forEach((method)=>{
             this[method] = this[method].bind(this);
         });
+        
     }
 
     componentWillMount = ()=>{
-        
         if(this.props.match.params.register){
             const paramRegister = this.props.match.params.register;
             if(paramRegister === "success"){
@@ -95,12 +98,14 @@ export default class Entrar extends Component {
         const email = this.state.email;
         const password = this.state.password;
 
+        const requestUrl = this.state.backend_url + this.state.for;
+
         if(email !== '' && password !== ''){
             var spinner = document.getElementById('spinner');
             spinner.classList.remove('d-none');
             const responseServer = await axios({
                 method: 'POST',
-                url: this.state.backend_url,
+                url: requestUrl,
                 data: {
                     email,
                     password
@@ -116,7 +121,12 @@ export default class Entrar extends Component {
                 await this.cookieGenerate('tokenUser', tokenUser);
                 await this.cookieGenerate('Auth', true);
                 await this.cookieGenerate('userData', responseServer.data.userData);
-                this.props.history.push('/me');
+                if(responseServer.data.teacher === 'true'){
+                    this.props.history.push('/tutor');
+                }
+                if(responseServer.data.teacher === 'false'){
+                    this.props.history.push('/me');
+                }
             }
             
             if(responseServer.data['status'] === '300'){
@@ -168,7 +178,7 @@ export default class Entrar extends Component {
                         </Alert>
                         <div className="card card-entrar">
                             <div className="card-header">
-                                <h1 className="w-100 text-center">Entrar</h1>
+                                <h1 className="w-100 text-center">{this.state.login_title}</h1>
                             </div>
                             <div className="card-body">
                                 <div className="form p-3">

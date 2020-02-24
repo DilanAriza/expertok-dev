@@ -3,14 +3,16 @@ import {BrowserRouter, Route} from 'react-router-dom'
 import Home from './components/Home/';
 import Entrar from './components/Entrar/';
 import Registrarme from './components/Registrarme/';
-// import Me from './components/Me/Me';
 import UserHome from './components/UserHome/'
+import Tutor from './components/Tutor/Tutor';
+import UploadVideo from './components/UploadVideo/UploadVideo';
 
 class App extends Component{
     constructor(props){
         super(props);
         this.state={
             url_backend: "https://expertok-backend.herokuapp.com/"
+            // url_backend: "http://localhost:4000/"
         }
     }
     render(){
@@ -42,11 +44,31 @@ class App extends Component{
                                     <Entrar
                                         {...props}
                                         url_backend={this.state.url_backend}
+                                        for={'student'}
+                                        title={'Estudiante'}
                                     />
                                 )
                             }
                         }
                     }
+                />
+                <Route 
+                exact
+                path="/tutorLogin"
+                component={
+                    (props, match)=>{
+                        if(match){
+                            return(
+                                <Entrar
+                                    {...props}
+                                    url_backend={this.state.url_backend}
+                                    for={'teacher'}
+                                    title={'Tutor'}
+                                />
+                            )
+                        }
+                    }
+                }
                 />
                 <Route 
                     exact
@@ -89,6 +111,38 @@ class App extends Component{
                             if(match){
                                 return(
                                     <UserHome
+                                        {...props}
+                                        url_backend={this.state.url_backend}
+                                    />
+                                )
+                            }
+                        }
+                    }
+                />
+                <Route 
+                    exact
+                    path="/tutor"
+                    component={
+                        (props, match)=>{
+                            if(match){
+                                return(
+                                    <Tutor
+                                        {...props}
+                                        url_backend={this.state.url_backend}
+                                    />
+                                )
+                            }
+                        }
+                    }
+                />
+                <Route 
+                    exact
+                    path="/upload/video"
+                    component={
+                        (props, match)=>{
+                            if(match){
+                                return(
+                                    <UploadVideo
                                         {...props}
                                         url_backend={this.state.url_backend}
                                     />
