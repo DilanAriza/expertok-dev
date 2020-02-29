@@ -112,23 +112,24 @@ export default class Entrar extends Component {
                 }
             });
             if(responseServer.data['status'] === "200"){
-                this.setState({
-                    alert_open: true,
-                    alert_color: 'primary',
-                    alert_message: responseServer.data['message']
-                });
                 const tokenUser = responseServer.data.token;
-                await this.cookieGenerate('tokenUser', tokenUser);
-                await this.cookieGenerate('Auth', true);
-                await this.cookieGenerate('userData', responseServer.data.userData);
-                if(responseServer.data.teacher === 'true'){
-                    this.props.history.push('/tutor');
-                }
-                if(responseServer.data.teacher === 'false'){
-                    this.props.history.push('/me');
-                }
+                this.cookieGenerate('tokenUser', tokenUser);
+                this.cookieGenerate('Auth', true);
+                this.cookieGenerate('userData', responseServer.data.userData);
+
+                localStorage.setItem('tokenUser', tokenUser);
+                localStorage.setItem('Auth', true);
+                localStorage.setItem('userData', responseServer.data.userData);
+
+                if(cookies.get('Auth') && cookies.get('tokenUser')){
+                    if(responseServer.data.teacher === 'true'){
+                        this.props.history.push('/tutor');
+                    }
+                    if(responseServer.data.teacher === 'false'){
+                        this.props.history.push('/me');
+                    }
+                }            
             }
-            
             if(responseServer.data['status'] === '300'){
                 spinner.classList.add('d-none');
                 this.setState({

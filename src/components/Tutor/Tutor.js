@@ -10,24 +10,22 @@ import Cookies from 'universal-cookie'
 import NavbarTutor from '../NavbarTutor/NavbarTutor';
 const cookies = new Cookies();
 
-const userData = cookies.getAll();
-
 export default class Tutor extends Component {
     constructor (props){
         super(props);
         this.state={
             url_backend: this.props.url_backend,
             props_father: this.props,
-            tutorData: userData.userData
+            tutorData: cookies.get('userData')
         }
     }
 
     componentDidMount = () => {
-
-        console.log(this.state.tutorData);
-
-        if(userData){
-            if(userData.Auth === 'true'){
+        const auth = cookies.get('Auth');
+        if(auth){
+            if(auth === 'true'){
+                const userData = localStorage.getItem('userData')
+                console.log(userData.length);
             }else{
                 this.props.history.push('/');
             }
