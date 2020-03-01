@@ -7,10 +7,17 @@ import "firebase/firestore";
 import Cookies from 'universal-cookie'
 import NavbarTutor from '../NavbarTutor/NavbarTutor';
 import './assets/css/selectFile.css'
+
+//React Strap  ----------------------------------------------------
+import { Alert } from 'reactstrap'
+
 // import { Link } from 'react-router-dom';
+
+//Axios -----------------------------------------------------------
+import axios from 'axios';
+
 const cookies = new Cookies();
 
-const userData = cookies.getAll();
 const firebaseConfig = {
     apiKey: "AIzaSyBu2o7LFHh-_cI7YEyuW5cKN5v4ME9_Me4",
     authDomain: "expertok-7da90.firebaseapp.com",
@@ -25,35 +32,56 @@ const firebaseConfig = {
 firebase.initializeApp(firebaseConfig);
 
 class UploadVideo extends Component {
-    constructor() {
-        super();
+    constructor(props) {
+        super(props);
+
         this.state = {
             image: '',
             porcentaje: null,
             link_video: null,
-            tutorData: userData.userData,
+            tutorData: cookies.get('userData'),
+            tokenUser: cookies.get('tokenUser'),
+            idUser: cookies.get('userData').id,
             filename: 'Seleccionar Video',
-            porcentaje: null
+            urlUploadVideo: this.props.url_backend + 'upload/video/unit',
+            titleVideo:'',
+            descriptionVideo: ''
         }
-    }
-
-    state = {
-        image: null,
-        porcentaje: null,
-        link_video: null
+        console.log(this.state.tutorData)
     }
 
     handleFileChange = e => {
         const file = e.target.files[0];
-        const storageRef = firebase.storage().ref(`/videos/${file.name}`)
+        if(this.state.titleVideo!==''){
+            const storageRef = firebase.storage().ref(`/videos/${this.state.titleVideo}`)
+            this.setState({
+                file: file,
+                filename: file.name,
+                storageRef: storageRef
+            });
+        }else{
+            const storageRef = firebase.storage().ref(`/videos/${file.name}`)
+            this.setState({
+                file: file,
+                filename: file.name,
+                storageRef: storageRef
+            });
+        }
+    }
+
+    handleTitleVideo = e =>{
+        const title = e.target.value;
         this.setState({
-            file: file,
-            filename: file.name,
-            storageRef: storageRef
+            titleVideo: title
         });
     }
 
-
+    handleDesciptionVideo = e =>{
+        const desciption = e.target.value;
+        this.setState({
+            descriptionVideo: desciption
+        });
+    }
 
     handleSubmit = async e => {
         e.preventDefault();
@@ -63,29 +91,56 @@ class UploadVideo extends Component {
         const file = this.state.file;
         const task = storageRef.put(file);
 
-        task.on('state_changed', (snapshot)=>{
+        task.on('state_changed', async(snapshot)=>{
             let percentage = (snapshot.bytesTransferred / snapshot.totalBytes) * 100
             let porcentaje = Math.trunc(percentage);
             console.log(porcentaje + "%");
             this.setState({
-                porcentaje: porcentaje
+                porcentaje
             });
 
             if(porcentaje === 100){
                 loader.classList.add('d-none');
                 var success = document.getElementById('upload-success');
-                success.classList.remove('d-none');
+                success.classList.remove('d-none'); 
             }
         }, (error)=>{
             console.log(error.message);
             alert(error.message);
-        }, () =>{
+        }, async() =>{
             task.snapshot.ref.getDownloadURL().then(
-                (downloadURL)=>{
+                async(downloadURL)=>{
                     console.log("URL : ", downloadURL);
                     this.setState({
                         link_video: downloadURL
                     });
+
+                    const {
+                        tokenUser,
+                        idUser,
+                        titleVideo,
+                        descriptionVideo
+                    } = this.state;
+
+                    const responserServer = await axios({
+                        method: 'POST',
+                        url: this.state.urlUploadVideo,
+                        data: {
+                            idUser,
+                            downloadURL,
+                            titleVideo,
+                            dateVideo: new Date(),
+                            descriptionVideo
+                        },
+                        headers:{
+                            'x-access-token':tokenUser
+                        }
+                    })
+
+                    console.log(responserServer)
+                    if(responserServer.data.status === "200"){
+                        console.log('ok');
+                    }
                 }
             );
             console.log('archivo subido');
@@ -102,7 +157,7 @@ class UploadVideo extends Component {
                             <div className="row d-flex justify-content-center">
                                 <div className="col-10 banner-text m-0 p-3">
                                     <h2 className="text-primary text-center">
-                                        Distribuye tu sabiduria
+                                        Subir video
                                     </h2>
                                 </div>
                             </div>
@@ -116,21 +171,6 @@ class UploadVideo extends Component {
                             <li className="list-group-item">{this.state.tutorData.email}</li>
                             <li className="list-group-item">{this.state.tutorData.username}</li>
                         </ul>
-                        <h2 className="title-intro mt-3">Subir video</h2>
-                        <div className="row">
-                            <div className="col-12">
-                                <div className="input-group">
-                                    <div className="input-group-prepend">
-                                        <button type="submit" className="input-group-text btn btn-success" id="inputGroupFileAddon01" onClick={this.handleSubmit}>Subir Video</button>
-                                    </div>
-                                    <div className="custom-file">
-                                        <input type="file" className="custom-file-input" id="inputGroupFile01"
-                                        aria-describedby="inputGroupFileAddon01" onChange={this.handleFileChange}/>
-                                        <label className="custom-file-label" htmlFor="inputGroupFile01">{this.state.filename}</label>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
                         <div id="loader" className="row mt-3 d-none my-5">
                             <div className="col-12 row">
                                 <div className="text-primary col-6">
@@ -145,10 +185,57 @@ class UploadVideo extends Component {
                             <h5 className="text-primary">
                                 Archivo subido satisfactoriamente <br/>
                                 Este es el link de tu video: <br/><br/>
-                                <a target="_blank" href={this.state.link_video}>
+                                <a target="_blank" rel="noopener noreferrer" href={this.state.link_video}>
                                     {this.state.link_video}
                                 </a>
                             </h5>
+                        </div>
+                        <div className="row">
+                            <div className="col-4">
+                                <h2 className="title-intro mt-5">Subir video</h2>
+                                <div className="row">
+                                    <div className="col-12">
+                                        <div className="form-group">
+                                            <input 
+                                                type="text"
+                                                className="form-control"
+                                                onChange={this.handleTitleVideo}
+                                                placeholder="Titulo de tu video"    
+                                            />
+                                        </div>
+                                        <div className="form-group">
+                                            <textarea 
+                                                cols="30" 
+                                                rows="10"
+                                                className="form-control"
+                                                onChange={this.handleDesciptionVideo}
+                                                placeholder="Descripcion de tu video"></textarea>
+                                        </div>
+                                    </div>
+                                    <div className="col-12">
+                                        <div className="input-group">
+                                            <div className="custom-file">
+                                                <input type="file" className="custom-file-input" id="inputGroupFile01"
+                                                aria-describedby="inputGroupFileAddon01" onChange={this.handleFileChange}/>
+                                                <label className="custom-file-label" htmlFor="inputGroupFile01">{this.state.filename}</label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    
+                                    <div className="col-12 mt-3">
+                                        <div className="form-group">
+                                            <button 
+                                                type="submit" 
+                                                className="form-control btn btn-success" 
+                                                id="inputGroupFileAddon01" 
+                                                onClick={this.handleSubmit}
+                                            >
+                                                Subir Video
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>

@@ -3,7 +3,6 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap/dist/js/bootstrap.min.js';
 import './assets/css/tutor.banner.css';
 import './assets/css/tutor.index.css';
-import shoping from './assets/img/compras.svg';
 import { Link } from 'react-router-dom';
 
 import Cookies from 'universal-cookie'
