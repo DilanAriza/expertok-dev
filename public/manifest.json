@@ -2,22 +2,11 @@
     "short_name": "Expertok",
     "name": "Tutores de alta calidad",
     "icons": [{
-            "src": "icon.png",
-            "sizes": "64x64 32x32 24x24 16x16",
-            "type": "image/x-icon"
-        },
-        {
-            "src": "icon.png",
-            "type": "image/png",
-            "sizes": "192x192"
-        },
-        {
-            "src": "icon.png",
-            "type": "image/png",
-            "sizes": "512x512"
-        }
-    ],
-    "start_url": "./",
+        "src": "favicon.ico",
+        "sizes": "64x64 32x32 24x24 16x16",
+        "type": "image/x-icon"
+    }],
+    "start_url": "./index.html",
     "display": "standalone",
     "theme_color": "#007bff",
     "background_color": "#ffffff"

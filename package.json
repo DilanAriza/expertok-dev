@@ -2,6 +2,7 @@
     "name": "expertok",
     "version": "0.1.0",
     "private": true,
+    "main": "app.js",
     "engines": {
         "node": "13.7.0",
         "npm": "6.13.6"

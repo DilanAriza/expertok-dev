@@ -34,7 +34,7 @@ class App extends Component{
                         }
                     }
                 />
-                {/* <Route 
+                <Route 
                     exact
                     path="/entrar"
                     component={
@@ -150,7 +150,7 @@ class App extends Component{
                             }
                         }
                     }
-                /> */}
+                />
             </BrowserRouter> 
         )
     }
